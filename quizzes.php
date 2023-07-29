@@ -84,46 +84,45 @@
             // Add more questions...
         ];
 
-         // Function to shuffle and select random quiz questions
-         function getRandomQuizQuestions($data, $numQuestions)
-         {
-             shuffle($data);
-             return array_slice($data, 0, $numQuestions);
-         }
- 
-         // Select 5 random quiz questions
-         $numQuestions = 5;
-         $selectedQuestions = getRandomQuizQuestions($data, $numQuestions);
- 
-         // Display the selected quiz questions and options
-         foreach ($selectedQuestions as $index => $question) {
-             echo '<p>' . ($index + 1) . '. ' . $question['question'] . '</p>';
-             foreach ($question['incorrectAnswers'] as $answer) {
-                 echo '<label><input type="radio" name="q' . ($index + 1) . '" value="' . $answer . '"> ' . $answer . '</label><br>';
-             }
-             echo '<label><input type="radio" name="q' . ($index + 1) . '" value="' . $question['correctAnswer'] . '"> ' . $question['correctAnswer'] . '</label><br><br>';
-         }
-         ?>
- 
-         <input type="submit" name="submit" value="Submit Quiz">
-     </form>
- 
-     <?php
-     // Check if the form has been submitted
-     if (isset($_POST['submit'])) {
-         $score = 0;
- 
-         // Check the user's answers
-         foreach ($selectedQuestions as $index => $question) {
-             $userAnswer = $_POST['q' . ($index + 1)];
-             if ($userAnswer === $question['correctAnswer']) {
-                 $score++;
-             }
-         }
- 
-         // Display the user's score
-         echo '<p>Your score: ' . $score . '/' . $numQuestions . '</p>';
-     }
-     ?>
+        function getRandomQuizQuestions($data, $numQuestions)
+        {
+            shuffle($data);
+            return array_slice($data, 0, $numQuestions);
+        }
+
+        // Select 5 random quiz questions
+        $numQuestions = 5;
+        $selectedQuestions = getRandomQuizQuestions($data, $numQuestions);
+
+        // Display the selected quiz questions and options
+        foreach ($selectedQuestions as $index => $question) {
+            echo '<p>' . ($index + 1) . '. ' . $question['question'] . '</p>';
+            foreach ($question['incorrectAnswers'] as $answer) {
+                echo '<label><input type="radio" name="q' . ($index + 1) . '" value="' . $answer . '"> ' . $answer . '</label><br>';
+            }
+            echo '<label><input type="radio" name="q' . ($index + 1) . '" value="' . $question['correctAnswer'] . '"> ' . $question['correctAnswer'] . '</label><br><br>';
+        }
+        ?>
+
+        <input type="submit" name="submit" value="Submit Quiz">
+    </form>
+
+    <?php
+    // Check if the form has been submitted
+    if (isset($_POST['submit'])) {
+        $score = 0;
+
+        // Check the user's answers
+        foreach ($selectedQuestions as $index => $question) {
+            $userAnswer = $_POST['q' . ($index + 1)];
+            if ($userAnswer === $question['correctAnswer']) {
+                $score++;
+            }
+        }
+
+        // Display the user's score
+        echo '<p>Your score: ' . $score . '/' . $numQuestions . '</p>';
+    }
+    ?>
 </body>
 </html>
